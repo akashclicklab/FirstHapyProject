@@ -6,5 +6,6 @@
 
 module.exports = [
 
-    require('./users/users')
+    require('./users/users'),
+    require('./products/products')
 ];

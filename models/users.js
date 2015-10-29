@@ -11,7 +11,9 @@ var users = new Schema({
     phoneNumber:{type:String,unique:false},
     password:{type:String,required:true},
     status:{type: Number, default: 0 },
-    createdAt:{type:Date}
+    createdAt:{type:Date},
+
+    products: [{type: Schema.ObjectId, ref: 'products'}]
 
 });
 

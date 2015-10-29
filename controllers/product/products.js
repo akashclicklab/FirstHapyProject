@@ -9,13 +9,13 @@ var DAO = require('../../DAO');
 
 var mongoose = require('mongoose');
 
-var insertuser = function(data,callbackRoute)
+var insertproduct = function(data,callbackRoute)
 {
     async.waterfall([
         function(callback)
         {
 
-           DAO.userDAO.userInsert(data,callback)
+           DAO.productDAO.productInsert(data,callback)
            //return callbackRoute(null,"adadad");
         }
     ],function(error,results)
@@ -32,12 +32,12 @@ var insertuser = function(data,callbackRoute)
 }
 
 
-var getusers = function(callbackRoute)
+var getproducts = function(callbackRoute)
 {
     async.waterfall([
         function (callback)
         {
-        DAO.userDAO.userDetails(callback)
+        DAO.productDAO.productDetails(callback)
         }
     ],function(error,results)
         {
@@ -51,31 +51,7 @@ var getusers = function(callbackRoute)
             }
         });
 }
-
-
-
-var getcurrentusersdetails = function(userdata,callbackRoute)
-{
-    async.waterfall([
-        function (callback)
-        {
-            DAO.userDAO.currentuserDetails(userdata,callback)
-        }
-    ],function(error,results)
-    {
-        if(error)
-        {
-            return callbackRoute(error);
-        }
-        else
-        {
-            return callbackRoute(results);
-        }
-    });
-}
-
-
-
+/*
 
 var updateuser = function(datauserid,dataupdate,callbackRoute)
 {
@@ -118,7 +94,7 @@ var deleteuser = function(requestuserid,callbackRoute)
     });
 
 }
+*/
 
-
-module.exports= {insertuser:insertuser,getusers:getusers,updateuser:updateuser,deleteuser:deleteuser,getcurrentusersdetails:getcurrentusersdetails};
+module.exports= {insertproduct:insertproduct,getproducts:getproducts};
 

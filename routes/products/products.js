@@ -4,38 +4,15 @@
 
 var controller = require('../../controllers');
 
-var userlist= {
+
+var productlist= {
     method:'GET',
-    path :'/userlist',
+    path :'/productlist',
     config:{
         description:"Get All User Details",
         handler:function(error,reply)
         {
-controller.user.getusers(function(error,success) {
-    if (error) {
-        reply(error);
-    }
-    else {
-        reply(success);
-    }
-
-});
-          //  console.log("Inside");
-           // reply("Ok Inside Route user list");
-        }
-    }
-}
-
-
-/****** Get single user details ******/
-var getcurrentusersdetails= {
-    method:'POST',
-    path :'/userdetails',
-    config:{
-        description:"get current  users details",
-        handler:function(data,reply)
-        {
-            controller.user.getcurrentusersdetails(data.query,function(error,success) {
+            controller.product.getproducts(function(error,success) {
                 if (error) {
                     reply(error);
                 }
@@ -51,15 +28,14 @@ var getcurrentusersdetails= {
 }
 
 
-
-var userinsert= {
+var productinsert= {
     method:'POST',
-    path :'/userinsert',
+    path :'/productinsert',
     config:{
-        description:"insert users",
+        description:"insert productinsert",
         handler:function(data,reply)
         {
-            controller.user.insertuser(data.query,function(error,success) {
+            controller.product.insertproduct(data.query,function(error,success) {
                 if (error) {
                     reply(error);
                 }
@@ -75,7 +51,7 @@ var userinsert= {
 }
 
 
-
+/*
 var userUpdate = {
     method:"POST",
     path:"/userupdate",
@@ -122,7 +98,7 @@ var userDelete = {
             });
         }
     }
-}
-var dataall = [userlist,userinsert,userUpdate,userDelete,getcurrentusersdetails];
+} */
+var dataall = [productinsert,productlist];
 module.exports=dataall;
 

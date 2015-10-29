@@ -19,6 +19,26 @@ var userDetails  = function(callback)
     DaoManager.getData(models.users,callback)
 }
 
-module.exports ={
-    userInsert:userInsert,userDetails:userDetails
+var userUpdate  = function(datauserid,dataupdate,callback)
+{
+    DaoManager.updateData(models.users,datauserid,dataupdate,callback)
+}
+
+var userDelete  = function(datauserid,callback)
+{
+    DaoManager.deleteData(models.users,datauserid,callback)
+}
+
+
+var currentuserDetails = function(userdata,callback)
+{
+
+    var conditionQuery= {_id:userdata.userId};
+ //var    projections = {userId: 1, name: 1};
+    DaoManager.getCurrentUserData(models.users,conditionQuery,callback)
+
+
+}
+module.exports = {
+    userInsert:userInsert,userDetails:userDetails,userUpdate:userUpdate,userDelete:userDelete,currentuserDetails:currentuserDetails
 }
