@@ -61,7 +61,9 @@ var getcurrentusersdetails = function(userdata,callbackRoute)
         {
             DAO.userDAO.currentuserDetails(userdata,callback)
         }
-    ],function(error,results)
+
+    ],
+    function(error,results)
     {
         if(error)
         {

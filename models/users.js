@@ -12,7 +12,6 @@ var users = new Schema({
     password:{type:String,required:true},
     status:{type: Number, default: 0 },
     createdAt:{type:Date},
-
     products: [{type: Schema.ObjectId, ref: 'products'}]
 
 });

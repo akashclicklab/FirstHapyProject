@@ -11,20 +11,38 @@ var mongoose = require('mongoose');
 
 var insertproduct = function(data,callbackRoute)
 {
+    var retunresult;
     async.waterfall([
         function(callback)
         {
 
            DAO.productDAO.productInsert(data,callback)
            //return callbackRoute(null,"adadad");
+        },
+
+        function (result, callback) {
+            //console.log(data.userId);
+           // console.log(result._id);
+             retunresult= result;
+            var conditions = {
+                _id: data.userId
+            };
+            productsId = result._id;
+            var update = {
+                $addToSet: {products: productsId}
+            };
+            DAO.userDAO.userUpdateproduct(conditions, update, callback);
+
+
         }
-    ],function(error,results)
+    ],function(error,data1)
         {
+            console.log(retunresult);
             if(error) {
                 return callbackRoute(error);
             }
             else {
-                return callbackRoute(null,results);
+                return callbackRoute(null,retunresult);
 
             }
         });
@@ -73,15 +91,16 @@ var updateuser = function(datauserid,dataupdate,callbackRoute)
         }
 
     });
-}
+}*/
 
-var deleteuser = function(requestuserid,callbackRoute)
+var deleteproduct = function(requestprodcutid,callbackRoute)
 {
     async.waterfall([
         function(callback)
         {
-            DAO.userDAO.userDelete(requestuserid,callback)
-        }
+            DAO.productDAO.productDelete(requestprodcutid,callback)
+        },
+
     ],function(error,results){
         if(error)
         {
@@ -94,7 +113,7 @@ var deleteuser = function(requestuserid,callbackRoute)
     });
 
 }
-*/
 
-module.exports= {insertproduct:insertproduct,getproducts:getproducts};
+
+module.exports= {insertproduct:insertproduct,getproducts:getproducts,deleteproduct:deleteproduct};
 

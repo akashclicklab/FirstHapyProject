@@ -74,18 +74,19 @@ var userUpdate = {
           //  reply(data.query);
         }
     }
-}
+}*/
 
-var userDelete = {
+var productDelete = {
 
     method:"DELETE",
-    path:"/userdelete",
+    path:"/productdelete",
     config:{
 
-        description : "Delete user",
+        description : "Delete product",
         handler:function(data,reply)
         {
-            controller.user.deleteuser(data.query.user_id,function(error,success)
+           // console.log("dsf");
+            controller.product.deleteproduct(data.query.product_id,function(error,success)
             {
                 if(error)
                 {
@@ -98,7 +99,7 @@ var userDelete = {
             });
         }
     }
-} */
-var dataall = [productinsert,productlist];
+}
+var dataall = [productinsert,productlist,productDelete];
 module.exports=dataall;
 

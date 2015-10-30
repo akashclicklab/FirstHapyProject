@@ -28,6 +28,24 @@ exports.setData = function(model,data,callback)
 
 };
 
+
+exports.update = function (model, conditions, update, options, callback) {
+    model.update(conditions, update, options, function (err, result) {
+
+        if (err) {
+            console.log(err);
+            //logger.error("Update Query: ", err);
+            return callback(err);
+        }
+       // logger.trace("Update Result: ", JSON.stringify(result));
+        return callback(null, result);
+
+    });
+};
+
+
+
+
 /* get Data */
 
 exports.getData= function(model,callback)
@@ -71,10 +89,13 @@ exports.updateData= function(model,datauserid,dataupdate,callback)
 }
 
 
-exports.deleteData = function(model,requestuserid,callback)
+exports.deleteData = function(model,requestid,callback)
 {
+    //console.log("dsfdsf");
+
+    //console.log(requestid);
     model.remove(
-        {_id:requestuserid},
+        {_id:requestid},
         function(err,resultData)
         {
             if(err)
@@ -95,27 +116,36 @@ exports.getCurrentUserData= function(model,condition,callback)
 
     //var products = mongoose.model('products', products);
 
-    model.findOne(condition)
-    .populate('userId')
-    .exec(function(err, foundUser){
+
+    /*    model.find({products: {$elemMatch: {userId:'5630a6c0d9d32ff90144f3d6'}}},function(err,data)
+    {
+        if(err)
+        {
+            return callback(err);
+        }
+        //console.log("result");
+        // console.log(data);
+        return callback(null,data);
+
+    })*/
+
+
+
+      model.find(condition)
+          .populate('products')
+          .exec(function(err, foundUser){
+          console.log("RESPONSE");
+          console.log(err);
+          console.log("RESPONSE1");
+          console.log(foundUser);
         if(err){
-            throw err; //do something with error
+           throw err; //do something with error
         } else {
            callback(foundUser);
         }
     });
 
-   /* model.find(condition,function(err,data)
-        {
-            if(err)
-            {
-                return callback(err);
-            }
-            //console.log("result");
-            // console.log(data);
-            return callback(null,data);
 
-        }
-    )*/
+
 }
 

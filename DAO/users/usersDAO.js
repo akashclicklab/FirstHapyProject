@@ -29,6 +29,13 @@ var userDelete  = function(datauserid,callback)
     DaoManager.deleteData(models.users,datauserid,callback)
 }
 
+var userUpdateproduct  = function(conditions, update, callback)
+{
+    console.log("dsfs");
+    DaoManager.update(models.users,conditions, update, callback)
+}
+
+
 
 var currentuserDetails = function(userdata,callback)
 {
@@ -40,5 +47,5 @@ var currentuserDetails = function(userdata,callback)
 
 }
 module.exports = {
-    userInsert:userInsert,userDetails:userDetails,userUpdate:userUpdate,userDelete:userDelete,currentuserDetails:currentuserDetails
+    userInsert:userInsert,userDetails:userDetails,userUpdate:userUpdate,userDelete:userDelete,currentuserDetails:currentuserDetails,userUpdateproduct:userUpdateproduct
 }

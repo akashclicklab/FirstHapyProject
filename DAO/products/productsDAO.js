@@ -19,16 +19,21 @@ var productDetails  = function(callback)
     DaoManager.getData(models.products,callback)
 }
 
-/*var userUpdate  = function(datauserid,dataupdate,callback)
+var userUpdate  = function(datauserid,dataupdate,callback)
 {
     DaoManager.updateData(models.users,datauserid,dataupdate,callback)
 }
 
-var userDelete  = function(datauserid,callback)
+
+var productDelete  = function(dataproductid,callback)
 {
-    DaoManager.deleteData(models.users,datauserid,callback)
+    //console.log("dsfsd");
+    DaoManager.deleteData(models.products,dataproductid,callback)
 }
-*/
+
+
+
+
 module.exports = {
-    productInsert:productInsert,productDetails:productDetails
+    productInsert:productInsert,productDetails:productDetails,productDelete:productDelete
 }
