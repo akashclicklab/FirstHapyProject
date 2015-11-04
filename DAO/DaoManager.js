@@ -113,24 +113,6 @@ exports.deleteData = function(model,requestid,callback)
 
 exports.getCurrentUserData= function(model,condition,callback)
 {
-
-    //var products = mongoose.model('products', products);
-
-
-    /*    model.find({products: {$elemMatch: {userId:'5630a6c0d9d32ff90144f3d6'}}},function(err,data)
-    {
-        if(err)
-        {
-            return callback(err);
-        }
-        //console.log("result");
-        // console.log(data);
-        return callback(null,data);
-
-    })*/
-
-
-
       model.find(condition)
           .populate('products')
           .exec(function(err, foundUser){
@@ -149,3 +131,28 @@ exports.getCurrentUserData= function(model,condition,callback)
 
 }
 
+
+/* get Product Data */
+
+exports.getProductData= function(model,condition,callback)
+{
+    var query = {userId: '5630a6c0d9d32ff90144f3d6'};
+    var projection = {
+    };
+
+    model.find(query, projection).populate('userId').exec(function (err, data) {
+
+        if (err) {
+          //  logger.error("Error Data reference: ", err);
+            return callback(err);
+        }
+        return callback(null, data);
+
+    });
+
+
+
+
+
+
+}

@@ -2,13 +2,16 @@
  * Created by Click lab
  */
 
+var Joi = require('joi');
 var controller = require('../../controllers');
+var util = require('../../Utilities/util');
 
 var userlist= {
     method:'GET',
     path :'/userlist',
     config:{
         description:"Get All User Details",
+        tags: ['api', 'Api User List'],
         handler:function(error,reply)
         {
 controller.user.getusers(function(error,success) {
@@ -22,6 +25,17 @@ controller.user.getusers(function(error,success) {
 });
           //  console.log("Inside");
            // reply("Ok Inside Route user list");
+        },
+        plugins: {
+            'hapi-swagger': {
+                responseMessages: [
+                    {code: 200, message: 'OK'},
+                    {code: 400, message: 'Bad Request'},
+                    {code: 401, message: 'Invalid Access Token'},
+                    {code: 404, message: 'Customer Not Found'},
+                    {code: 500, message: 'Internal Server Error'}
+                ]
+            }
         }
     }
 }
@@ -70,9 +84,30 @@ var userinsert= {
             });
             //  console.log("Inside");
             // reply("Ok Inside Route user list");
-        }
+        },
+        validate: {
+
+
+         payload: {
+         email : Joi.string().email().trim().required(),
+
+             password : Joi.string().required().min(6).max(10)
+         },
+         /*failAction : function(data, reply, source, error) {
+      //   console.log("Inside error");
+       //  console.log(data.payload);
+
+          reply({ message: error.output.payload.message });
+
+
+
+         }*/
+            failAction: util.failActionFunction
+         },
     }
 }
+
+
 
 
 
